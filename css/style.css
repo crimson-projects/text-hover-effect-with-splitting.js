@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@700&display=swap");
+:root {
+  --bg: #f09ae9;
+  --border-size: 0.5em;
+}
+
+html {
+  height: 100%;
+  display: flex;
+}
+
+body {
+  margin: auto;
+}
+
+html,
+body {
+  background: var(--bg, #000);
+  color: #fff;
+  text-align: center;
+}
+
+.link {
+  display: block;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  font: normal 600 10vw/1.1 sans-serif;
+  font-family: "Archivo Narrow", sans-serif;
+  margin: 1em auto;
+}
+.link .char {
+  transition: transform 0.3s cubic-bezier(0.8, 0, 0.2, 1);
+  transition-delay: calc(0.02s * var(--char-index));
+}
+.link .char::after {
+  visibility: visible;
+  transform-origin: left bottom;
+  transition: inherit;
+  width: auto;
+  left: -3px;
+  right: -3px;
+}
+
+/* ---------------------------------- */
+.ultra .char::after {
+  content: "";
+  width: 100%;
+  top: 100%;
+  border-bottom: solid var(--border-size);
+  transform: translateY(calc(-1 * var(--border-size))) scaleY(0.2) translateZ(0);
+}
+.ultra:hover .char {
+  transform: translateY(calc(-1 * var(--border-size)));
+}
+.ultra:hover .char::after {
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
+/* ---------------------------------- */
+.ultra-2 {
+  --border-size: 0.1em;
+}
+.ultra-2 .char::after {
+  content: attr(data-char);
+  color: var(--bg);
+  visibility: visible;
+  transition: inherit;
+  transition-property: clip-path;
+  clip-path: polygon(0 calc(100% - var(--border-size, 1px)), 100% calc(100% - var(--border-size, 1px)), 100% 100%, 0% 100%);
+  background: white;
+}
+.ultra-2:hover .char::after {
+  clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
+}
